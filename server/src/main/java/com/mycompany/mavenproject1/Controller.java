@@ -11,12 +11,12 @@ import org.springframework.web.bind.annotation.GetMapping;
  *
  * @author ruanemanuell
  */
-
 @RestController
 
 public class Controller {
+
     @GetMapping("/")
-    public String test(){
+    public String test() {
         return "Testing";
     }
 }

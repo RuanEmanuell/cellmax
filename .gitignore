@@ -55,3 +55,4 @@ Thumbs.db
 *.swp
 
 server/database/database.db
+/server/target/
