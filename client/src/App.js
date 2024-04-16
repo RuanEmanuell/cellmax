@@ -3,8 +3,8 @@ import './App.css';
 
 function App() {
   return (
-    <div>
-      
+    <div className="container">
+      <h1 className="title">CellMax</h1>
     </div>
   );
 }

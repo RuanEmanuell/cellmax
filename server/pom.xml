@@ -12,7 +12,6 @@
         <exec.mainClass>com.mycompany.mavenproject1.Main</exec.mainClass>
     </properties>
      <dependencies>
-        <!-- Spring Boot Starter -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter</artifactId>
@@ -22,6 +21,12 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
             <version>2.6.4</version> 
+        </dependency>
+        <dependency>
+            <groupId>org.xerial</groupId>
+            <artifactId>sqlite-jdbc</artifactId>
+            <version>3.15.1
+            </version>
         </dependency>
     </dependencies>
 </project>
