@@ -54,3 +54,4 @@ Thumbs.db
 *.bak
 *.swp
 
+server/database/database.db
