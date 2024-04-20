@@ -4,19 +4,18 @@
  */
 package com.mycompany.mavenproject1;
 
-import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.*;
+import java.util.List;
 
 /**
  *
  * @author ruanemanuell
  */
 @RestController
-
 public class Controller {
 
-    @GetMapping("/")
-    public String test() {
-        return "Testing";
+    @GetMapping("/smartphones/get")
+    public List<Smartphone> getSmartphones() {
+        return SQLConnection.getData();
     }
 }
