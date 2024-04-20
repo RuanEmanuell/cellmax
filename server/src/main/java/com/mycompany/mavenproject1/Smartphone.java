@@ -44,4 +44,60 @@ public class Smartphone {
     public void setBrand(String brand) {
         this.brand = brand;
     }
+    
+        public int getYear() {
+        return year;
+    }
+
+    public void setYear(int year) {
+        this.year = year;
+    }
+
+    public String getSystemName() {
+        return systemName;
+    }
+
+    public void setSystemName(String systemName) {
+        this.systemName = systemName;
+    }
+
+    public Double getScreenSize() {
+        return screenSize;
+    }
+
+    public void setScreenSize(Double screenSize) {
+        this.screenSize = screenSize;
+    }
+
+    public String getCpu() {
+        return cpu;
+    }
+
+    public void setCpu(String cpu) {
+        this.cpu = cpu;
+    }
+
+    public int getCameraNumber() {
+        return cameraNumber;
+    }
+
+    public void setCameraNumber(int cameraNumber) {
+        this.cameraNumber = cameraNumber;
+    }
+
+    public int getCameraMP() {
+        return cameraMP;
+    }
+
+    public void setCameraMP(int cameraMP) {
+        this.cameraMP = cameraMP;
+    }
+
+    public String getImageLink() {
+        return imageLink;
+    }
+
+    public void setImageLink(String imageLink) {
+        this.imageLink = imageLink;
+    }
 }

@@ -14,6 +14,7 @@ import java.util.List;
 @RestController
 public class Controller {
 
+    @CrossOrigin(origins = "http://localhost:3000/")
     @GetMapping("/smartphones/get")
     public List<Smartphone> getSmartphones() {
         return SQLConnection.getData();
