@@ -52,3 +52,6 @@ You need to download the files of this repository.
 		Install dependencies using 'npm install'.
 		Run Reactt with 'npm start'.
 		Access http://localhost:3000 in your browser.
+
+### Here are some images of the project running: ⚡️
+![ezgif-1-ce63f9bf95](https://github.com/RuanEmanuell/crudjava/assets/113607857/245066cf-fcc0-4b13-998b-d2017415403a)
