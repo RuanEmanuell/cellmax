@@ -1,9 +1,21 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { IconDeviceMobile, IconBrandApple, IconBrandAndroid, IconCalendarWeek, IconCpu, IconCamera } from '@tabler/icons-react';
 import './App.css';
 
 function App() {
   const [smartphoneList, setSmartphoneList] = useState(null);
+  const [smartphoneInputs, setSmartphoneInputs] = useState({
+    name: "",
+    brand: "",
+    year: "",
+    systemName: "",
+    screenSize: "",
+    cpu: "",
+    cameraNumber: "",
+    cameraMP: "",
+    imageLink: ""
+  })
+  const addModalRef = useRef(null);
 
   async function getData() {
     try {
@@ -13,6 +25,18 @@ function App() {
     } catch (error) {
       console.error(error);
     }
+  }
+
+  function showModal(){
+    addModalRef.current.showModal();
+  }
+
+  function handleInputChange(event, key){
+    const value = event.target.value;
+    setSmartphoneInputs(prev => ({
+      ...prev,
+      [key] : value
+    }))
   }
 
   useEffect(() => {
@@ -61,6 +85,19 @@ function App() {
           </div>
         ) : <></>}
     </section>
+    <button className="addButton" onClick={showModal}>+</button>
+    <dialog ref={addModalRef}>
+      <section className="addModal">
+          {Object.entries(smartphoneInputs).map(([key, value]) => (
+            <div key = {key} className="addBox">
+            <label className="addLabel">{key}</label>
+            <input value = {value} 
+            onChange={(event) => handleInputChange(event, key)}
+            className="addInput"></input>
+            </div>
+          ))}
+      </section>
+    </dialog>
     </div>
   );
 }
