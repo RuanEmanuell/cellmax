@@ -28,22 +28,30 @@ h3{
     align-items: center;
     margin: 0.5em auto;
     transition: all 0.2s;
-    word-break: break-all;
+    height: 100%;
 }
 
 .smartphoneBox:hover{
     cursor: pointer;
-    padding: 2.5%;
+    padding: 1%;
 }
 
 .smartphoneBox h2{
     margin: 0 2em;
 }
 
+.smartphoneImageBox{
+    height: 25vh;
+    width: 100%;
+    max-width: 200px;
+    display: flex;
+    justify-content: center;
+}
+
 .smartphoneImage{
-    width: 75%;
-    height: auto;
     margin: 1em;
+    width: 100%;
+    height: auto;
 }
 
 .iconSpecBox{

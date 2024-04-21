@@ -106,7 +106,9 @@ function App() {
           smartphoneList.map(smartphone =>
             <div className="smartphoneBox" key={smartphone["id"]} onClick={() => showEditModal(smartphone)}>
               <h2>{smartphone["brand"]} {smartphone["name"]}</h2>
+              <div className="smartphoneImageBox">
               <img src={smartphone['imageLink']} className="smartphoneImage" alt="Imagem do Smartphone"></img>
+              </div>
               <div className="iconSpecBox">
                 <div>
                   <IconCalendarWeek />

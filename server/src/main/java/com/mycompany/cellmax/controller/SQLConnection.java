@@ -10,7 +10,13 @@ import java.sql.ResultSet;
 public class SQLConnection {
 
     private Connection conn;
+    
+    CreateDB databaseCreator = new CreateDB();
 
+    public SQLConnection() {
+      this.databaseCreator.createDatabase();
+    }
+    
     public void connectDatabase() {
         closeConnection();
         try {
