@@ -16,21 +16,23 @@ public class Controller {
         this.smartphoneDAO = smartphoneDAO;
     }
 
-    @CrossOrigin(origins = "http://localhost:3000")
     @GetMapping("/get")
     public List<Smartphone> getSmartphones() {
         return smartphoneDAO.getAllSmartphones();
     }
     
-    @CrossOrigin(origins = "http://localhost:3000")
     @PostMapping("/post")
     public Smartphone addSmartphone(@RequestBody Smartphone smartphone) {
         return smartphoneDAO.addSmartphone(smartphone);
     }
     
-    @CrossOrigin(origins = "http://localhost:3000")
-    @PostMapping("/put")
+    @PutMapping("/put")
     public Smartphone editSmartphone(@RequestBody Smartphone smartphone) {
         return smartphoneDAO.editSmartphone(smartphone);
+    }
+    
+    @DeleteMapping("/delete/{id}")
+    public Long deleteSmartphone(@PathVariable Long id) {
+        return smartphoneDAO.deleteSmartphone(id);
     }
 }

@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
-import { IconDeviceMobile, IconBrandApple, IconBrandAndroid, IconCalendarWeek, IconCpu, IconCamera } from '@tabler/icons-react';
+import { IconDeviceMobile, IconBrandApple, IconBrandAndroid, IconCalendarWeek, IconCpu, IconCamera, IconTrash } from '@tabler/icons-react';
 import './App.css';
 
 function App() {
@@ -29,20 +29,12 @@ function App() {
     }
   }
 
-  async function addOrEditSmartphone(){
+  async function addOrEditSmartphone() {
     try {
-      const url = editingMode ? "http://localhost:8080/put" : "http://localhost:8080/post";
-      
-      // Adiciona o ID à solicitação POST se estiver no modo de edição
-      if (editingMode) {
-        smartphoneInputs.id = smartphoneInputs.id || ''; // Garante que o ID esteja definido
-      } else {
-        delete smartphoneInputs.id; // Remove o ID da solicitação POST se estiver criando um novo smartphone
-      }
-  
-      await fetch(url, {
+      await fetch(
+        editingMode ? `http://localhost:8080/put` : "http://localhost:8080/post", {
         method: editingMode ? "PUT" : "POST",
-        headers: {"Content-Type": "application/json"},
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify(smartphoneInputs)
       });
       await getData();
@@ -52,13 +44,28 @@ function App() {
       console.error(error);
     }
   }
-  
+
+  async function deleteSmartphone() {
+    try {
+      await fetch(
+        `http://localhost:8080/delete/${smartphoneInputs.id}`, {
+        method: "DELETE",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(smartphoneInputs.id)
+      });
+      await getData();
+      setEditingMode(false);
+      closeModal();
+    } catch (error) {
+      console.error(error);
+    }
+  }
 
   function showModal() {
     addModalRef.current.showModal();
   }
 
-  function closeModal(){
+  function closeModal() {
     addModalRef.current.close();
     setSmartphoneInputs({
       name: "",
@@ -73,7 +80,7 @@ function App() {
     });
   }
 
-  function showEditModal(smartphone){
+  function showEditModal(smartphone) {
     setEditingMode(true);
     setSmartphoneInputs(smartphone);
     showModal();
@@ -136,22 +143,23 @@ function App() {
       <button className="addButton" onClick={showModal}>+</button>
       <dialog ref={addModalRef}>
         <section className="addModal">
-          <img src = {smartphoneInputs.imageLink ? smartphoneInputs.imageLink : "https://t4.ftcdn.net/jpg/03/96/94/97/360_F_396949753_wXrV9GJ4oWrKUOmTJw6XLaEVdmtrSjCF.jpg"} className="addImage"></img>
+        {editingMode ? <IconTrash onClick={deleteSmartphone} /> : <></>}
+          <img src={smartphoneInputs.imageLink ? smartphoneInputs.imageLink : "https://t4.ftcdn.net/jpg/03/96/94/97/360_F_396949753_wXrV9GJ4oWrKUOmTJw6XLaEVdmtrSjCF.jpg"} className="addImage"></img>
           {Object.entries(smartphoneInputs).map(([key, value]) => (
             <>
-            {key === "id" ? <></> :               <div key={key} className="addBox">
-              <label className="addLabel">{key}</label>
-              <input 
-                required 
-                value={value}
-                onChange={(event) => handleInputChange(event, key)}
-                className="addInput"></input>
-            </div>}
+              {key === "id" ? <></> : <div key={key} className="addBox">
+                <label className="addLabel">{key}</label>
+                <input
+                  required
+                  value={value}
+                  onChange={(event) => handleInputChange(event, key)}
+                  className="addInput"></input>
+              </div>}
             </>
           ))}
           <div className="buttonsBox">
-            <button className="defaultButton" style = {{backgroundColor: "rgb(0, 110, 255)"}} onClick={addOrEditSmartphone}>Confirmar</button>
-            <button className="defaultButton" style = {{backgroundColor: "red"}} onClick = {closeModal}>Cancelar</button>
+            <button className="defaultButton" style={{ backgroundColor: "rgb(0, 110, 255)" }} onClick={addOrEditSmartphone}>Confirmar</button>
+            <button className="defaultButton" style={{ backgroundColor: "red" }} onClick={closeModal}>Cancelar</button>
           </div>
         </section>
       </dialog>

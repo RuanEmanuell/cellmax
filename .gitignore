@@ -56,3 +56,4 @@ Thumbs.db
 
 server/database/database.db
 /server/target/
+*.log

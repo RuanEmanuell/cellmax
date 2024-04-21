@@ -17,10 +17,10 @@ public class SmartphoneDAO {
 
     public SmartphoneDAO() {
         this.sqlConnection = new SQLConnection();
-        this.sqlConnection.connectDatabase();
     }
 
     public List<Smartphone> getAllSmartphones() {
+        this.sqlConnection.connectDatabase();
         List<Smartphone> smartphones = new ArrayList<>();
         try {
             Connection conn = this.sqlConnection.getConnection();
@@ -47,6 +47,7 @@ public class SmartphoneDAO {
     }
 
     public Smartphone addSmartphone(Smartphone smartphone) {
+        this.sqlConnection.connectDatabase();
         try {
             Connection conn = this.sqlConnection.getConnection();
             PreparedStatement statement = conn.prepareStatement("INSERT INTO smartphones (name, brand, year, systemName, screenSize, cpu, cameraNumber, cameraMP, imageLink) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)");
@@ -72,8 +73,8 @@ public class SmartphoneDAO {
     }
 
     public Smartphone editSmartphone(Smartphone smartphone) {
+        this.sqlConnection.connectDatabase();
         try (Connection conn = this.sqlConnection.getConnection(); PreparedStatement statement = conn.prepareStatement("UPDATE smartphones SET name = ?, brand = ?, year = ?, systemName = ?, screenSize = ?, cpu = ?, cameraNumber = ?, cameraMP = ?, imageLink = ? WHERE id = ?")) {
-
             statement.setString(1, smartphone.getName());
             statement.setString(2, smartphone.getBrand());
             statement.setInt(3, smartphone.getYear());
@@ -96,4 +97,19 @@ public class SmartphoneDAO {
         return null;
     }
 
+    public Long deleteSmartphone(Long id) {
+        this.sqlConnection.connectDatabase();
+        System.out.println(id);
+        try (Connection conn = this.sqlConnection.getConnection(); PreparedStatement statement = conn.prepareStatement("DELETE FROM smartphones WHERE id = ?")) {
+            statement.setLong(1, id);
+            int rowsUpdated = statement.executeUpdate();
+            if (rowsUpdated > 0) {
+                System.out.println("Smartphone deletado com sucesso!");
+                return id;
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return null;
+    }
 }
